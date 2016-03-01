@@ -1,6 +1,6 @@
 (ns hello-world.core
   (:require [reagent.core :as reagent]
-            [fib.core :as fib]))
+            [reagent-json-editor.core :as foo]))
 
 (defn idempotent-render []
-  (reagent/render-component [:div (fib/greet)] (.getElementById js/document "root")))
+  (reagent/render-component [:div "hello"] (.getElementById js/document "root")))

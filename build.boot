@@ -1,5 +1,5 @@
 (set-env!
-  :source-paths #{"src" "vendor/fib/src"}
+  :source-paths #{"src" "vendor/reagent-json-editor/src"}
   :resource-paths #{"html"}
   :dependencies '[
     [adzerk/boot-cljs "1.7.170-3" :scope "test"]
@@ -7,7 +7,7 @@
     [adzerk/boot-reload "0.4.2" :scope "test"]
     [org.clojure/clojurescript "1.7.170"]
     [reagent "0.6.0-alpha"]
-    [org.dgetz/fib "0.0.1-SNAPSHOT"]
+    [org.prognostic/reagent-json-editor "0.0.1-SNAPSHOT"]
 
     ;; boot-cljs-repl
     [adzerk/boot-cljs-repl "0.3.0" :scope "test"]
