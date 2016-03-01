@@ -2,10 +2,10 @@
   :source-paths #{"src" "vendor/reagent-json-editor/src"}
   :resource-paths #{"html"}
   :dependencies '[
-    [adzerk/boot-cljs "1.7.170-3" :scope "test"]
-    [pandeiro/boot-http "0.7.1-SNAPSHOT" :scope "test"]
-    [adzerk/boot-reload "0.4.2" :scope "test"]
-    [org.clojure/clojurescript "1.7.170"]
+    [adzerk/boot-cljs "1.7.228-1" :scope "test"]
+    [pandeiro/boot-http "0.7.3" :scope "test"]
+    [adzerk/boot-reload "0.4.5" :scope "test"]
+    [org.clojure/clojurescript "1.7.228"]
     [reagent "0.6.0-alpha"]
     [org.prognostic/reagent-json-editor "0.0.1-SNAPSHOT"]
 
