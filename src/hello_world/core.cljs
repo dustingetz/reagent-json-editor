@@ -1,7 +1,7 @@
 (ns hello-world.core
   (:require [reagent.core :as reagent]
-            [reagent-json-editor.core :as foo]
-            [cursor.core :refer [cursor]]))
+            [cursor.core :refer [cursor]]
+            [hello-world.App :refer [App]]))
 
 (defonce store
   (reagent/atom {}))
@@ -10,15 +10,7 @@
 (defn render [k store old-val new-val]
       (let [cur (cursor store)]
            (reagent/render-component
-             [:div.App
-              [:div
-               "State"
-               [:pre (js/JSON.stringify (clj->js @cur) nil 2)]]
-              [:div
-               "Editor"]
-              [:div "Second editor, because we can"]
-
-              ]
+             [App cur]
              (.getElementById js/document "root"))))
 
 (def initial-state {:a 10
