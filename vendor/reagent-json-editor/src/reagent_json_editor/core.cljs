@@ -1,6 +1,7 @@
 (ns reagent-json-editor.core
-  (:require [cursor.core :refer [cursor]]))
-
+  (:require [cursor.core :refer [cursor]]
+            [reagent-json-editor.JsonLeafEditor :refer [JsonLeafEditor]]))
 
 (defn JsonEditor [cur]
-      [:pre (js/JSON.stringify (clj->js @cur) nil 2)])
+      [:div [:code "a: "] [JsonLeafEditor (cur [:a])]])
+
