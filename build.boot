@@ -5,7 +5,7 @@
                   [pandeiro/boot-http "0.7.3" :scope "test"]
                   [adzerk/boot-reload "0.4.5" :scope "test"]
                   [org.clojure/clojurescript "1.7.228"]
-                  [reagent "0.6.0-alpha"]
+                  [reagent "0.6.0-alpha" :exclusions [cljsjs/react]]
                   [org.prognostic/reagent-json-editor "0.0.1-SNAPSHOT"]
                   [org.prognostic/cursor "0.0.1-SNAPSHOT"]
 

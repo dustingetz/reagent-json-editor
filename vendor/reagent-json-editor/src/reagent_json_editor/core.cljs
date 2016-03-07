@@ -1,6 +1,32 @@
 (ns reagent-json-editor.core
-  (:require [cursor.core :refer [cursor]]
+  (:require [reagent.core :as reagent]
+            [cursor.core :refer [cursor]]
             [reagent-json-editor.JsonLeafEditor :refer [JsonLeafEditor]]))
 
+(declare JsonEditor render-node)
+
+(def tree-view (reagent/adapt-react-class js/TreeView))
+
+(defn render-node [k cur]
+  (let [val @cur]
+    (if (or
+          (map? val)
+          (seq? val)
+          (vector? val)
+          (array? val))
+      [tree-view {:nodeLabel (str k) :key (str k)} [JsonEditor cur]]
+      [:div {:key (str k)}
+       [:code (str k ": ")]
+       [JsonLeafEditor cur]])))
+
 (defn JsonEditor [cur]
-  [:div [:code "a: "] [JsonLeafEditor (cur [:a])]])
+  (let
+    [val @cur
+     el (cond (map? val) (map (fn [[k _]] (render-node k (cur [k]))) val)
+              (or
+                (seq? val)
+                (vector? val)
+                (array? val)) (map-indexed (fn [k _] (render-node k (cur [k]))) val)
+              :else (js/console.log "todo")
+              )]
+    [:div {:class "wrapper"} el]))
