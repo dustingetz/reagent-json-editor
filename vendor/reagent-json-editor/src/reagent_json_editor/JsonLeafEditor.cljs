@@ -33,4 +33,4 @@
             [:button {:on-click #(commit! cur state)
                       :disabled (not valid?)}
              "commit"]]
-           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} @cur])]))))
+           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (js/JSON.stringify (clj->js @cur) nil 2)])]))))
