@@ -1,11 +1,12 @@
 (ns reagent-json-editor.JsonLeafEditor
-  (:require [reagent.core :as reagent]))
+  (:require [reagent.core :as reagent]
+            [clojure.string :as string]))
 
-(defn commit [cur state]
-  (swap! cur (constantly (js/JSON.parse (:jsValue @state))))
+(defn commit! [cur state]
+  (swap! cur (constantly (js/JSON.parse (:js-value @state))))
   (swap! state update-in [:editing] (constantly false)))
 
-(defn is-valid [value]
+(defn valid-json? [value]
   (try
     (do
       (js/JSON.parse value)
@@ -14,18 +15,22 @@
       false)))
 
 (defn JsonLeafEditor [cur]
-  (let [state (reagent/atom {:jsValue (js/JSON.stringify (clj->js @cur) nil 2)
+  (let [state (reagent/atom {:js-value (js/JSON.stringify (clj->js @cur) nil 2)
                              :editing false})]
     (fn [cur]
-      [:span {:class (str "JsonLeafEditor"
-                          (if (not= (js/JSON.stringify (clj->js @cur)) (:jsValue @state)) " dirty" nil)
-                          (if (is-valid (:jsValue @state)) nil " invalid"))}
-       (if (:editing @state)
-         [:div
-          [:input {:value (:jsValue @state)
-                   :on-change (fn [e] (swap! state update-in [:jsValue] (constantly (-> e .-target .-value))))
-                   :style {:background "transparent"}}]
-          [:button {:on-click #(commit cur state)
-                    :disabled (not (is-valid (:jsValue @state)))}
-           "commit"]]
-         [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} @cur])])))
+      (let [{:keys [:js-value :editing]} @state
+            dirty? (not= (js/JSON.stringify (clj->js @cur)) js-value)
+            valid? (valid-json? js-value)
+            classes ["JsonLeafEditor"
+                     (if dirty? "dirty" nil)
+                     (if valid? nil "invalid")]]
+        [:span {:class (string/join " " (remove nil? classes))}
+         (if editing
+           [:div
+            [:input {:value js-value
+                     :on-change #(swap! state update-in [:js-value] (constantly (-> % .-target .-value)))
+                     :style {:background "transparent"}}]
+            [:button {:on-click #(commit! cur state)
+                      :disabled (not valid?)}
+             "commit"]]
+           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} @cur])]))))
