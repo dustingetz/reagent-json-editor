@@ -3,5 +3,4 @@
             [reagent-json-editor.JsonLeafEditor :refer [JsonLeafEditor]]))
 
 (defn JsonEditor [cur]
-      [:div [:code "a: "] [JsonLeafEditor (cur [:a])]])
-
+  [:div [:code "a: "] [JsonLeafEditor (cur [:a])]])
