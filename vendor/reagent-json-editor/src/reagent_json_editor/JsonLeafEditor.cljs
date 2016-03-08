@@ -1,15 +1,16 @@
 (ns reagent-json-editor.JsonLeafEditor
   (:require [reagent.core :as reagent]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [cljs.reader :as reader]))
 
 (defn commit! [cur state]
-  (swap! cur (constantly (cljs.reader/read-string (:js-value @state))))
+  (swap! cur (constantly (reader/read-string (:js-value @state))))
   (swap! state update-in [:editing] (constantly false)))
 
 (defn valid-json? [value]
   (try
     (do
-      (cljs.reader/read-string value)
+      (reader/read-string value)
       true)
     (catch js/Error e
       false)))
