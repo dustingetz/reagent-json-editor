@@ -18,7 +18,7 @@
    :b "20"
    :c nil
    :d {:foo {:bar 42
-             :baz 55
+             :baz :boop
              :buzz "womp"}}
    :e [{:name "Alice" :id 0}
        {:name "Bob" :id 1}
