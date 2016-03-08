@@ -1,6 +1,6 @@
 (ns reagent-json-editor.core
   (:require [reagent.core :as reagent]
-            [cursor.core :refer [cursor]]
+            [react-treeview]
             [reagent-json-editor.JsonLeafEditor :refer [JsonLeafEditor]]))
 
 (declare JsonEditor render-node)

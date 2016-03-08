@@ -1,0 +1,12 @@
+.JsonLeafEditor.dirty {
+    background-color: #99ccff;
+}
+
+.JsonLeafEditor.invalid {
+    background-color: #CC9999;
+}
+
+.JsonLeafEditor > .editButton {
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -33,3 +33,5 @@
 
 (defn idempotent-render []
   (render :react-render store @store @store))
+
+(main)
