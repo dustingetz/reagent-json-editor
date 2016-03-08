@@ -17,7 +17,7 @@
       [tree-view {:nodeLabel (str k) :key (str k)} [JsonEditor cur]]
       [:div {:key (str k)}
        [:code (str k ": ")]
-       [JsonLeafEditor cur]])))
+       ^{:key @cur} [JsonLeafEditor cur]])))
 
 (defn JsonEditor [cur]
   (let
