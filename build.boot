@@ -26,14 +26,13 @@
          '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
          '[adzerk.bootlaces :refer :all])
 
-(def +version+ "0.1.0")
+(def +version+ "0.1.0-SNAPSHOT")
 (bootlaces! +version+)
 
 
 (task-options!
   pom {:project 'org.prognostic/reagent-json-editor
-       :version +version+}
-  push {:gpg-sign false})
+       :version +version+})
 
 
 (deftask dev []
