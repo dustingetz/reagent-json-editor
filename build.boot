@@ -32,7 +32,9 @@
 
 (task-options!
   pom {:project 'org.prognostic/reagent-json-editor
-       :version +version+})
+       :version +version+}
+  push {:gpg-sign false})
+
 
 (deftask dev []
   (comp (serve :dir "target/")
