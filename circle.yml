@@ -22,5 +22,7 @@ dependencies:
     - boot cljs
 
 deployment:
-  override:
-    - cd vendor/reagent-json-editor && boot pom jar push-snapshot
+  master:
+    branch: master
+    commands:
+      - cd vendor/reagent-json-editor && boot pom jar push-snapshot
