@@ -27,8 +27,7 @@
 
 (defn main []
   (add-watch store :react-render render)
-  (reset! store initial-state)
-  )
+  (reset! store initial-state))
 
 
 (defn idempotent-render []

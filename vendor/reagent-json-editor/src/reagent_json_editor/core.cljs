@@ -27,6 +27,6 @@
                 (seq? val)
                 (vector? val)
                 (array? val)) (map-indexed (fn [k _] (render-node k (cur [k]))) val)
-              :else (js/console.log "todo")
-              )]
+              :else (js/console.log "todo"))]
+
     [:div {:class "wrapper"} el]))
