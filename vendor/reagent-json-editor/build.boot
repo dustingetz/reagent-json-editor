@@ -9,7 +9,7 @@
 (require '[adzerk.boot-cljs :refer :all]
          '[adzerk.bootlaces :refer :all])
 
-(def +version+ "0.0.1-SNAPSHOT")
+(def +version+ "0.1.0-SNAPSHOT")
 (bootlaces! +version+)
 
 (task-options!
