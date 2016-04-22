@@ -2,13 +2,14 @@
   :source-paths #{"src"
                   "vendor/reagent-json-editor/src"}
   :resource-paths #{"resources"
+                    "generated-resources"
                     "vendor/react-treeview-0.4.3/resources"
                     "vendor/reagent-json-editor/resources"}
   :dependencies '[[adzerk/boot-cljs "1.7.228-1" :scope "test"]
                   [pandeiro/boot-http "0.7.3" :scope "test"]
                   [adzerk/boot-reload "0.4.5" :scope "test"]
                   [org.clojure/clojurescript "1.7.228"]
-                  [reagent "0.6.0-alpha"]
+                  [reagent "0.6.0-alpha" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
                   [org.prognostic/reagent-json-editor "0.1.0-SNAPSHOT"]
                   [org.prognostic/cursor "0.0.1-SNAPSHOT"]
 
@@ -32,12 +33,5 @@
         (cljs-repl)
         (cljs
           :source-map true
-          :optimizations :none
-          :compiler-options {:foreign-libs [{:file "vendor/react-treeview-0.4.3/src/react-treeview-umd.js"
-                                             :provides ["react-treeview"]}]})))
-
-(deftask build []
-  (cljs :optimizations :advanced
-        :compiler-options {:foreign-libs [{:file "vendor/react-treeview-0.4.3/src/react-treeview-umd.js"
-                                           :provides ["react-treeview"]}]
-                           :externs ["externs/react-treeview.ext.js"]}))
+          :optimizations :none)
+        (target)))
