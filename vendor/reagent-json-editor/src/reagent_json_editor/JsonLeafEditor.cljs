@@ -1,19 +1,12 @@
 (ns reagent-json-editor.JsonLeafEditor
   (:require [reagent.core :as reagent]
             [clojure.string :as string]
-            [cljs.reader :as reader]))
+            [reagent-json-editor.serialize :as serialize]))
 
 (defn commit! [cur state]
-  (swap! cur (constantly (reader/read-string (:js-value @state))))
+  (swap! cur (constantly (serialize/decode (:js-value @state))))
   (swap! state update-in [:editing] (constantly false)))
 
-(defn valid-json? [value]
-  (try
-    (do
-      (reader/read-string value)
-      true)
-    (catch js/Error e
-      false)))
 
 (defn JsonLeafEditor [cur]
   (let [state (reagent/atom {:js-value (pr-str @cur)
@@ -21,7 +14,7 @@
     (fn [cur]
       (let [{:keys [:js-value :editing]} @state
             dirty? (not= (pr-str @cur) js-value)
-            valid? (valid-json? js-value)
+            valid? (serialize/valid? js-value)
             classes ["JsonLeafEditor"
                      (if dirty? "dirty" nil)
                      (if valid? nil "invalid")]]
@@ -34,4 +27,4 @@
             [:button {:on-click #(commit! cur state)
                       :disabled (not valid?)}
              "commit"]]
-           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (pr-str @cur)])]))))
+           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (serialize/encode @cur)])]))))

@@ -10,7 +10,7 @@
                   [adzerk/boot-reload "0.4.5" :scope "test"]
                   [org.clojure/clojurescript "1.7.228"]
                   [reagent "0.6.0-alpha" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
-                  [org.prognostic/reagent-json-editor "0.1.0-SNAPSHOT"]
+                  ;[org.prognostic/reagent-json-editor "0.2.0-SNAPSHOT"]
                   [org.prognostic/cursor "0.0.1-SNAPSHOT"]
 
                   ;; boot-cljs-repl

@@ -1,6 +1,8 @@
 (ns hello-world.App
   (:require-macros [cljs.core])
   (:require [reagent-json-editor.core :refer [JsonEditor]]
+            [reagent-json-editor.serialize :as serialize]
+            [cljs.reader :as reader]
             [cljs.pprint :refer [pprint]]))
 
 (defn App [cur]
@@ -8,3 +10,7 @@
    [:div "State" [:pre (with-out-str (pprint @cur))]]
    [:div "Editor" [JsonEditor cur]]
    [:div "Second editor, because we can" [JsonEditor cur]]])
+
+
+(defmethod serialize/encode :default [o] (pr-str o))
+(defmethod serialize/decode :default [s] (reader/read-string s))
