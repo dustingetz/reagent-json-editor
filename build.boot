@@ -24,6 +24,8 @@
          '[adzerk.boot-reload :refer [reload]]
          '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]])
 
+(task-options!
+  pom {:project 'org.prognostic/reagent-json-editor-example})
 
 (deftask dev []
   (comp (serve :dir "target/")

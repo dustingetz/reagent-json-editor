@@ -18,7 +18,7 @@ dependencies:
     - chmod +x ~/bin/boot
     - boot show -d
   override:
-    - cd vendor/reagent-json-editor && boot pom jar install
+    - cd vendor/reagent-json-editor && ./build.sh
     - boot cljs
 
 deployment:
