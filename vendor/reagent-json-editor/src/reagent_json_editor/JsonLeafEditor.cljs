@@ -9,11 +9,11 @@
 
 
 (defn JsonLeafEditor [cur]
-  (let [state (reagent/atom {:js-value (pr-str @cur)
+  (let [state (reagent/atom {:js-value (serialize/encode @cur)
                              :editing false})]
     (fn [cur]
       (let [{:keys [:js-value :editing]} @state
-            dirty? (not= (pr-str @cur) js-value)
+            dirty? (not= (serialize/encode @cur) js-value)
             valid? (serialize/valid? js-value)
             class (->>
                     ["JsonLeafEditor"
@@ -30,4 +30,4 @@
                      :disabled (not valid?)}
             "commit"]]
           [:span {:class class}
-           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (serialize/encode @cur)]])))))
+           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (pr-str @cur)]])))))
