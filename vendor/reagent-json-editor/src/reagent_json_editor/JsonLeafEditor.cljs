@@ -15,16 +15,19 @@
       (let [{:keys [:js-value :editing]} @state
             dirty? (not= (pr-str @cur) js-value)
             valid? (serialize/valid? js-value)
-            classes ["JsonLeafEditor"
+            class (->>
+                    ["JsonLeafEditor"
                      (if dirty? "dirty" nil)
-                     (if valid? nil "invalid")]]
-        [:span {:class (string/join " " (remove nil? classes))}
-         (if editing
-           [:div
-            [:input {:value js-value
-                     :on-change #(swap! state update-in [:js-value] (constantly (-> % .-target .-value)))
-                     :style {:background "transparent"}}]
-            [:button {:on-click #(commit! cur state)
-                      :disabled (not valid?)}
-             "commit"]]
-           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (serialize/encode @cur)])]))))
+                     (if valid? nil "invalid")]
+                    (remove nil?)
+                    (string/join " "))]
+        (if editing
+          [:span {:class class}
+           [:input {:value js-value
+                    :on-change #(swap! state update-in [:js-value] (constantly (-> % .-target .-value)))
+                    :style {:background "transparent"}}]
+           [:button {:on-click #(commit! cur state)
+                     :disabled (not valid?)}
+            "commit"]]
+          [:span {:class class}
+           [:code.editButton {:on-click #(swap! state update-in [:editing] (constantly true))} (serialize/encode @cur)]])))))
