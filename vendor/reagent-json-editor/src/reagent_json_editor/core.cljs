@@ -13,7 +13,9 @@
           (seq? val)
           (vector? val)
           (array? val))
-      [tree-view {:nodeLabel (str k) :key (str k)} [JsonEditor cur]]
+      [tree-view
+       {:nodeLabel (reagent/as-element [:code (str k)]) :key (str k)}
+       [JsonEditor cur]]
       [:div {:key (str k)}
        [:code (str k " ")]
        ^{:key @cur} [JsonLeafEditor cur]])))
