@@ -3,8 +3,8 @@
             [cursor.core :refer [cursor]]
             [hello-world.App :refer [App]]))
 
-(defonce store
-  (reagent/atom {}))
+
+(defonce store (atom {}))
 
 
 (defn render [k store old-val new-val]
