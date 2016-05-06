@@ -5,11 +5,9 @@ body {
 div.App {
     background: #fff;
     padding: 10px;
-    display: table;
 }
 
 div.App > div {
-    display: table-cell;
     padding: 10px;
     vertical-align: top;
 }

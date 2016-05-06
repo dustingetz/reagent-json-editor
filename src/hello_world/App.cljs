@@ -7,9 +7,9 @@
 
 (defn App [cur]
   [:div.App
-   [:div "State" [:pre (with-out-str (pprint @cur))]]
    [:div "Editor" [JsonEditor cur]]
-   [:div "Second editor, because we can" [JsonEditor cur]]])
+   [:hr]
+   [:div "State" [:pre (with-out-str (pprint @cur))]]])
 
 
 (defmethod serialize/encode :default [o] (pr-str o))
